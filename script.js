@@ -19,7 +19,7 @@ const contentDiv = document.getElementById('contents');
 const button = document.getElementById('btn');
 
 function render() {
-    contentDiv.innerText = `${getText()}`;
+    contentDiv.innerText = getText();
     contentDiv.style.backgroundColor = getColor();
 }
 
