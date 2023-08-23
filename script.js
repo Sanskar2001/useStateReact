@@ -33,9 +33,7 @@ let currentVirtualDOM = {
   children: [],
 };
 
-const render = () => {
-  console.log(prevVirtualDOM);
-  // console.log(currentVirtualDOM);
+const diffAndApplyChanges = (prevVirtualDOM, currentVirtualDOM) => {
   for (const key in prevVirtualDOM.props) {
     console.log(key + " : " + prevVirtualDOM.props[key]);
     console.warn(key + " : " + currentVirtualDOM.props[key]);
@@ -44,13 +42,17 @@ const render = () => {
       if (key === "style.backgroundColor") {
         prevVirtualDOM.nodeReference.style.backgroundColor =
           currentVirtualDOM.props[key];
-        prevVirtualDOM.props[key] = currentVirtualDOM.props[key];
       } else {
         prevVirtualDOM.nodeReference[key] = currentVirtualDOM.props[key];
-        prevVirtualDOM.props[key] = currentVirtualDOM.props[key];
       }
+      prevVirtualDOM.props[key] = currentVirtualDOM.props[key];
     }
   }
+};
+
+const render = () => {
+  console.log(prevVirtualDOM);
+  diffAndApplyChanges(prevVirtualDOM, currentVirtualDOM);
 };
 
 function updateVirtualDOM() {
